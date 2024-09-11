@@ -4,10 +4,10 @@ X=fea;
 Y=gnd;
 nClusts = length(unique(gnd));
 r= length(unique(gnd));
-m=300;%×Ó¿Õ¼äµÄÎ¬¶È
-l=100;%Ñ¡ÔñÌØÕ÷µÄÊıÁ¿
+m=300;%å­ç©ºé—´çš„ç»´åº¦
+l=100;%é€‰æ‹©ç‰¹å¾çš„æ•°é‡
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%³õÊ¼»¯W,H
+%åˆå§‹åŒ–W,H
 [n,d]=size(X);
 B=NSSRD_init_S(fea',m);
 A=ones(d,m);
@@ -25,10 +25,9 @@ rand('twister',5489);
 X_new=SLNMF(r,X,W,H,G,alpha,beta,beta1,gamma,r,l,NIter);
 for i=1:40
     label=litekmeans(X_new,nClusts,'MaxIter',100,'Replicates',20);
-    newres = bestMap(gnd,label);
-    AC = length(find(gnd == newres))/length(gnd);
-    MIhat=MutualInfo(gnd,label);
-    result(i,:)=[AC,MIhat];
+    label=litekmeans(X_new,nClusts,'MaxIter',100,'Replicates',20);
+    result1 = ClusteringMeasure(gnd,label); 
+    result(i,:) = result1;
 end
 for j=1:2
     a=result(:,j);
