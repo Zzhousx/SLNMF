@@ -25,7 +25,6 @@ rand('twister',5489);
 X_new=SLNMF(r,X,W,H,G,alpha,beta,beta1,gamma,r,l,NIter);
 for i=1:40
     label=litekmeans(X_new,nClusts,'MaxIter',100,'Replicates',20);
-    label=litekmeans(X_new,nClusts,'MaxIter',100,'Replicates',20);
     result1 = ClusteringMeasure(gnd,label); 
     result(i,:) = result1;
 end
